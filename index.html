@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Arrow-focus Web Component</title>
+	</head>
+
+	<body>
+		<script type="module">
+			import ArrowFocus from './main.js';
+			customElements.define('arrow-focus', ArrowFocus);
+		</script>
+
+		<arrow-focus>
+			<button type="button">01</button>
+			<a href="#">This is a link</a>
+			<button type="button">03</button>
+			<button type="button">04</button>
+			<button type="button">05</button>
+			<br />
+			<button type="button">06</button>
+			<button type="button">07</button>
+			<button type="button">08</button>
+			<select><option selected>This is a select</option></select>
+			<button type="button">10</button>
+			<br />
+			<button type="button">11</button>
+			<label><input type="checkbox" />Here's a checkbox</label>
+			<button type="button" autofocus>13</button>
+			<button type="button">14</button>
+			<button type="button">15</button>
+			<br />
+			<button type="button">16</button>
+			<button type="button">17</button>
+			<button type="button">18</button>
+			<input type="text" value="And an input" readonly />
+			<button type="button">20</button>
+			<br />
+			<button type="button">21</button>
+			<u tabindex="0">I have a tabindex</u>
+			<button type="button">23</button>
+			<button type="button">24</button>
+			<button type="button">25</button>
+		</arrow-focus>
+	</body>
+</html>
