@@ -2,47 +2,240 @@
 
 <html lang="en">
 	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Arrow-focus Web Component</title>
+		<meta charset="utf-8" />
+		<title>Arrow-focus web component</title>
+
+		<style>
+			:root {
+				font-family: sans-serif;
+			}
+
+			dev-draggable {
+				margin: 0.3em;
+			}
+		</style>
 	</head>
 
 	<body>
 		<script type="module">
 			import ArrowFocus from './main.js';
+			import DevBadged from './dev-helpers/badged.js';
+			import DevDraggable from './dev-helpers/draggable.js';
+
 			customElements.define('arrow-focus', ArrowFocus);
+			customElements.define('dev-badged', DevBadged);
+			customElements.define('dev-draggable', DevDraggable);
 		</script>
 
-		<arrow-focus>
-			<button type="button">01</button>
-			<a href="#">This is a link</a>
-			<button type="button">03</button>
-			<button type="button">04</button>
-			<button type="button">05</button>
+		<p>Use the arrow keys to focus things.</p>
+
+		<p>Drag inputs around by the gray bars.</p>
+
+		<arrow-focus id="arrow-focus-container">
+			<dev-draggable>
+				<dev-badged>
+					<button type="button">01</button>
+				</dev-badged>
+			</dev-draggable>
+
+			<dev-draggable>
+				<dev-badged>
+					<a href="#">This is a link</a>
+				</dev-badged>
+			</dev-draggable>
+
+			<dev-draggable>
+				<dev-badged>
+					<button type="button">03</button>
+				</dev-badged>
+			</dev-draggable>
+
+			<dev-draggable>
+				<dev-badged>
+					<button type="button">04</button>
+				</dev-badged>
+			</dev-draggable>
+
+			<dev-draggable>
+				<dev-badged>
+					<button type="button">05</button>
+				</dev-badged>
+			</dev-draggable>
+
 			<br />
-			<button type="button">06</button>
-			<button type="button">07</button>
-			<button type="button">08</button>
-			<select><option selected>This is a select</option></select>
-			<button type="button">10</button>
+
+			<dev-draggable>
+				<dev-badged>
+					<button type="button">06</button>
+				</dev-badged>
+			</dev-draggable>
+
+			<dev-draggable>
+				<dev-badged>
+					<button type="button">07</button>
+				</dev-badged>
+			</dev-draggable>
+
+			<dev-draggable>
+				<dev-badged>
+					<button type="button">08</button>
+				</dev-badged>
+			</dev-draggable>
+
+			<dev-draggable>
+				<dev-badged>
+					<select><option selected>This is a select</option></select>
+				</dev-badged>
+			</dev-draggable>
+
+			<dev-draggable>
+				<dev-badged>
+					<button type="button">10</button>
+				</dev-badged>
+			</dev-draggable>
+
 			<br />
-			<button type="button">11</button>
-			<label><input type="checkbox" />Here's a checkbox</label>
-			<button type="button" autofocus>13</button>
-			<button type="button">14</button>
-			<button type="button">15</button>
+
+			<dev-draggable>
+				<dev-badged>
+					<button type="button">11</button>
+				</dev-badged>
+			</dev-draggable>
+
+			<dev-draggable>
+				<dev-badged>
+					<label>
+						<input type="checkbox" />
+						Here's a checkbox
+					</label>
+				</dev-badged>
+			</dev-draggable>
+
+			<dev-draggable>
+				<dev-badged>
+					<button type="button" autofocus>13</button>
+				</dev-badged>
+			</dev-draggable>
+
+			<dev-draggable>
+				<dev-badged>
+					<button type="button">14</button>
+				</dev-badged>
+			</dev-draggable>
+
+			<dev-draggable>
+				<dev-badged>
+					<button type="button">15</button>
+				</dev-badged>
+			</dev-draggable>
+
 			<br />
-			<button type="button">16</button>
-			<button type="button">17</button>
-			<button type="button">18</button>
-			<input type="text" value="And an input" readonly />
-			<button type="button">20</button>
+
+			<dev-draggable>
+				<dev-badged>
+					<button type="button">16</button>
+				</dev-badged>
+			</dev-draggable>
+
+			<dev-draggable>
+				<dev-badged>
+					<button type="button">17</button>
+				</dev-badged>
+			</dev-draggable>
+
+			<dev-draggable>
+				<dev-badged>
+					<button type="button">18</button>
+				</dev-badged>
+			</dev-draggable>
+
+			<dev-draggable>
+				<dev-badged>
+					<input type="text" value="And an input" readonly />
+				</dev-badged>
+			</dev-draggable>
+
+			<dev-draggable>
+				<dev-badged>
+					<button type="button">20</button>
+				</dev-badged>
+			</dev-draggable>
+
 			<br />
-			<button type="button">21</button>
-			<u tabindex="0">I have a tabindex</u>
-			<button type="button">23</button>
-			<button type="button">24</button>
-			<button type="button">25</button>
+
+			<dev-draggable>
+				<dev-badged>
+					<button type="button">21</button>
+				</dev-badged>
+			</dev-draggable>
+
+			<dev-draggable>
+				<dev-badged>
+					<u tabindex="0">I have a tabindex</u>
+				</dev-badged>
+			</dev-draggable>
+
+			<dev-draggable>
+				<dev-badged>
+					<button type="button">23</button>
+				</dev-badged>
+			</dev-draggable>
+
+			<dev-draggable>
+				<dev-badged>
+					<button type="button">24</button>
+				</dev-badged>
+			</dev-draggable>
+
+			<dev-draggable>
+				<dev-badged>
+					<button type="button">25</button>
+				</dev-badged>
+			</dev-draggable>
 		</arrow-focus>
+
+		<hr />
+
+		<p>
+			<label>
+				<input type="checkbox" id="simulation-toggle" />
+				Show projection<!--
+			--></label>:
+			Focus an input and hit an arrow key
+			to reveal the order of inputs it finds in that direction.
+		</p>
+
+		<script type="module">
+			const arrowFocusContainer = document.getElementById('arrow-focus-container');
+			const simulationToggle = document.getElementById('simulation-toggle');
+
+			simulationToggle.addEventListener('change', function() {
+				if (!simulationToggle.checked) {
+					const allBadged = arrowFocusContainer.querySelectorAll('dev-badged');
+
+					for (let badged of allBadged) {
+						badged.label = null;
+					}
+				}
+			});
+
+			arrowFocusContainer.addEventListener('project', function(event) {
+				if (!simulationToggle.checked) {
+					return;
+				}
+
+				event.preventDefault();
+
+				const allBadged = arrowFocusContainer.querySelectorAll('dev-badged');
+
+				for (let badged of allBadged) {
+					badged.label = null;
+				}
+
+				for (let projected of event.detail) {
+					projected.closest('dev-badged').label = event.detail.indexOf(projected);
+				}
+			});
+		</script>
 	</body>
 </html>

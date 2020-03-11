@@ -150,11 +150,15 @@ class ArrowFocus extends HTMLElement {
 		const filteredElements = this.filterElementsByAngle(focusableElements, [sourceX, sourceY], angle);
 		const sortedElements = this.sortElementsByDistance(filteredElements, [sourceX, sourceY]);
 
-		this.dispatchEvent(new CustomEvent('project', {
+		const projectionEvent = new CustomEvent('project', {
+			bubbles: true,
+			cancelable: true,
 			detail: sortedElements
-		}));
+		});
 
-		if (sortedElements.length !== 0) {
+		this.dispatchEvent(projectionEvent);
+
+		if (sortedElements.length !== 0 && !projectionEvent.defaultPrevented) {
 			let target = sortedElements[0];
 
 			if (target.tagName === 'LABEL') {
