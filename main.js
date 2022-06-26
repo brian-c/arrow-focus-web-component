@@ -1,4 +1,4 @@
-var FOCUSABLE_SELECTOR = [
+const FOCUSABLE_SELECTOR = [
 	'a',
 	'button',
 	'input',
@@ -47,18 +47,47 @@ class ArrowFocus extends HTMLElement {
 	handleKeydown(event) {
 		if (document.activeElement && event.key.startsWith('Arrow')) {
 			const direction = event.key.slice('Arrow'.length).toLowerCase();
-			const handled = this.handleArrowKey(direction);
+			const newlyFocused = this.handleArrowKey(document.activeElement, direction);
 
-			if (handled) {
+			if (newlyFocused) {
 				event.preventDefault();
 			}
 		}
 	}
 
-	getSource(direction) {
+	handleArrowKey(element, direction) {
+		const focusableElements = this.getFocusableElements();
+		const [sourceX, sourceY] = this.getStartingPoint(element, direction);
+		const angle = this.getAngle(direction);
+		const filteredElements = this.findElementsAlongAngle(focusableElements, angle, [sourceX, sourceY]);
+		const sortedElements = this.sortElementsByDistance(filteredElements, [sourceX, sourceY]);
+
+		const projectionEvent = new CustomEvent('project', {
+			bubbles: true,
+			cancelable: true,
+			detail: sortedElements
+		});
+
+		this.dispatchEvent(projectionEvent);
+
+		if (sortedElements.length !== 0 && !projectionEvent.defaultPrevented) {
+			let target = sortedElements[0];
+
+			if (target.tagName === 'LABEL') {
+				target = this.getLabeledControl(target);
+			}
+
+			target.focus();
+			return target;
+		} else {
+			return null;
+		}
+	}
+
+	getStartingPoint(element, direction) {
 		const MARGIN = 1.5;
 
-		const r = document.activeElement.getBoundingClientRect();
+		const r = element.getBoundingClientRect();
 
 		return {
 			up: [r.left + r.width / 2, r.top + r.height - MARGIN],
@@ -103,7 +132,7 @@ class ArrowFocus extends HTMLElement {
 		return focusableElements;
 	}
 
-	filterElementsByAngle(elements, [sourceX, sourceY], offsetAngle) {
+	findElementsAlongAngle(elements, offsetAngle, [sourceX, sourceY]) {
 		return elements.filter(element => {
 			const rect = element.getBoundingClientRect();
 
@@ -141,36 +170,6 @@ class ArrowFocus extends HTMLElement {
 
 			return d1 - d2;
 		});
-	}
-
-	handleArrowKey(direction) {
-		const [sourceX, sourceY] = this.getSource(direction);
-		const focusableElements = this.getFocusableElements();
-		const angle = this.getAngle(direction);
-		const filteredElements = this.filterElementsByAngle(focusableElements, [sourceX, sourceY], angle);
-		const sortedElements = this.sortElementsByDistance(filteredElements, [sourceX, sourceY]);
-
-		const projectionEvent = new CustomEvent('project', {
-			bubbles: true,
-			cancelable: true,
-			detail: sortedElements
-		});
-
-		this.dispatchEvent(projectionEvent);
-
-		if (sortedElements.length !== 0 && !projectionEvent.defaultPrevented) {
-			let target = sortedElements[0];
-
-			if (target.tagName === 'LABEL') {
-				target = this.getLabeledControl(target);
-			}
-
-			target.focus();
-
-			return target;
-		} else {
-			return false;
-		}
 	}
 }
 
