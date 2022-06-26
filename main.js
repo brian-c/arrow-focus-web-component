@@ -59,7 +59,7 @@ class ArrowFocus extends HTMLElement {
 		const focusableElements = this.getFocusableElements();
 		const [sourceX, sourceY] = this.getStartingPoint(element, direction);
 		const angle = this.getAngle(direction);
-		const filteredElements = this.findElementsAlongAngle(focusableElements, angle, [sourceX, sourceY]);
+		const filteredElements = this.findElementsAlongAngle(focusableElements, angle, [sourceX, sourceY], element);
 		const sortedElements = this.sortElementsByDistance(filteredElements, [sourceX, sourceY]);
 
 		const projectionEvent = new CustomEvent('project', {
@@ -132,8 +132,12 @@ class ArrowFocus extends HTMLElement {
 		return focusableElements;
 	}
 
-	findElementsAlongAngle(elements, offsetAngle, [sourceX, sourceY]) {
+	findElementsAlongAngle(elements, offsetAngle, [sourceX, sourceY], skipElement) {
 		return elements.filter(element => {
+			if (element.tagName === 'LABEL' && this.getLabeledControl(element) === skipElement) {
+				return false;
+			}
+
 			const rect = element.getBoundingClientRect();
 
 			const corners = [
